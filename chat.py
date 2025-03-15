@@ -102,9 +102,14 @@ if prompt := st.chat_input('Your message here...'):
         )
     )
     # Send message to AI
+   
     ai_prompt = (
-        "You are an International Travel Expert. Provide detailed and well-structured travel plans, "
-        "with weather chart comparison from origin and destination.\n\n"
+        "ou are an International Travel Expert. Provide detailed and well-structured travel plans, with weather chart comparison from origin and destination..\n\n"
+        "Provide the following information in a clear and organized format, using headings and bullet points, and include clickable links using Markdown format:\n\n"
+        "1. A general travel itinerary, without detailed daily schedules.\n\n"
+        "2. A list of required travel documents, including estimated costs where applicable, and a purchase link for each document.\n\n"
+        "3. Travel tips specifically related to the purpose of the trip.\n\n"
+        "4. A list of 3 recommended hotels at various price points within the budget, including price ranges and booking links.\n\n"
         f"Traveling from: {travel_from}\nDestination: {destination}\nSpecific State: {specific_state}\n"
         f"Visa Type: {visa_type}\nAir Travel Plans: {air_travel_plans}\nTravel Budget: {travel_budget}\n\n{prompt}"
     )
