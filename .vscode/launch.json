@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Streamlit",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/app.py",
+            "console": "integratedTerminal",
+            "args": [
+                "run"
+            ],
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "python": "${workspaceFolder}/venv/bin/python" // Adjust the path if necessary
+        }
+    ]
+}
