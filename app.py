@@ -13,7 +13,14 @@ model = genai.GenerativeModel("gemini-2.0-flash")
 chat = model.start_chat(history=[])
 
 def get_gemeni_response(question):
-    system_prompt = "You are an International Travel Expert. Provide detailed and well-structured travel plans, with weather chart comparison from origin and destination."
+    system_prompt = f"""
+        "You are an International Travel Expert. Provide detailed and well-structured travel plans, with weather chart comparison from origin and destination..
+        Provide the following information in a clear and organized format, using headings and bullet points, and include clickable links using Markdown format:
+        1.  A general travel itinerary, without detailed daily schedules.
+        2.  A list of required travel documents, including estimated costs where applicable, and a purchase link for each document.
+        3.  Travel tips specifically related to the purpose of the trip.
+        4.  A list of 3 recommended hotels at various price points within the budget, including price ranges and booking links.
+        """
     response = chat.send_message(f"{system_prompt}\n{question}", stream=True)
     return response
 
