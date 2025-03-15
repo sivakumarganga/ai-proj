@@ -13,7 +13,7 @@ model = genai.GenerativeModel("gemini-2.0-flash")
 chat = model.start_chat(history=[])
 
 def get_gemeni_response(question):
-    system_prompt = "You are an International Travel Expert. Provide detailed and well-structured travel plans , with weather chart comparission from orgin and destination."
+    system_prompt = "You are an International Travel Expert. Provide detailed and well-structured travel plans, with weather chart comparison from origin and destination."
     response = chat.send_message(f"{system_prompt}\n{question}", stream=True)
     return response
 
