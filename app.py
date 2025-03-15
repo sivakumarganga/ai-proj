@@ -41,7 +41,6 @@ if 'plans' not in st.session_state:
 if 'budget' not in st.session_state:
     st.session_state['budget'] = ""
 
-print("step :", st.session_state['step'])
 
 def ask_question(prompt):
     st.session_state['chat_history'].append(("Bot", prompt))
@@ -111,6 +110,27 @@ elif st.session_state['step'] == 6:
             st.session_state['chat_history'].append(("Bot", resp))
             st.session_state['step'] += 1
             st.rerun()
+
+# Upload itinerary document
+uploaded_file = st.file_uploader("Upload your itinerary document", type=["txt", "pdf", "docx"])
+if uploaded_file is not None:
+    # Process the uploaded file
+    file_details = {"filename": uploaded_file.name, "filetype": uploaded_file.type, "filesize": uploaded_file.size}
+    st.write(file_details)
+    # Read the file content
+    if uploaded_file.type == "text/plain":
+        content = uploaded_file.read().decode("utf-8")
+    elif uploaded_file.type == "application/pdf":
+        import PyPDF2
+        reader = PyPDF2.PdfFileReader(uploaded_file)
+        content = ""
+        for page in range(reader.numPages):
+            content += reader.getPage(page).extract_text()
+    elif uploaded_file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+        import docx
+        doc = docx.Document(uploaded_file)
+        content = "\n".join([para.text for para in doc.paragraphs])
+    st.text_area("Itinerary Content", content, height=300)
 
 st.subheader("Chat History")
 for role, text in st.session_state['chat_history']:
