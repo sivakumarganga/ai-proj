@@ -4,12 +4,12 @@ load_dotenv()
 import streamlit as st
 import os
 import google.generativeai as genai
+from streamlit_chat import message
 
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
-## function to load gemeni pro model and get response
+# Function to load Gemini Pro model and get response
 model = genai.GenerativeModel("gemini-2.0-flash")
-
 chat = model.start_chat(history=[])
 
 def get_gemeni_response(question):
@@ -63,6 +63,9 @@ elif st.session_state['step'] == 2:
             st.session_state['chat_history'].append(("Bot", resp))
             st.session_state['step'] += 1
 
-st.subheader("The chat history is : ")
+st.subheader("Chat History")
 for role, text in st.session_state['chat_history']:
-    st.write(f"{role} : {text}")
+    if role == "Bot":
+        message(text, is_user=False)
+    else:
+        message(text, is_user=True)
