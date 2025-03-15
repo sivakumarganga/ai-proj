@@ -1,25 +1,40 @@
-# > pip install -r .\requirments.txt
+# Project: AI Travel Assistant
 
+This project is an AI-based travel assistant that helps users plan their trips by providing relevant information based on their inputs.
 
+## How to Run
 
-Questions to Ask:
+1. Install the required dependencies:
+    ```sh
+    pip install -r .\requirements.txt
+    ```
 
+2. Run the application:
+    ```sh
+    streamlit run app.py
+    ```
 
-Traveling from(Given)
+## Questions to Chat Agent Ask:
 
-Destination(Given)
+- Traveling from (Given)
+- Destination (Given)
+- Specific State needed if not already mentioned
+- Type of Visa owned and plans for visit
+- Plans for Air travel and staying
+- Budget for travel?
 
-Specific State needed if not already mentioned
+## Response:
 
-Type of Visa owned and plans for visit
+Provide all the responses to each piece of information and...
 
-Plans for Air travel and staying
+## Technologies Used
 
-Budget for travel?
+- Python
+- Streamlit
+- OpenAI GPT-3
+- Pandas
+- NumPy
 
+## Relevant Information
 
-
-
-Response:
-
-Provide all the responses to each piece of information and 
+This AI Travel Assistant leverages the power of natural language processing to understand user inputs and provide tailored travel advice. It is designed to be user-friendly and interactive, making travel planning easier and more efficient.
