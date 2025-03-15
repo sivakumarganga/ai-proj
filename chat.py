@@ -48,7 +48,16 @@ with st.sidebar:
     # TODO: Give user a chance to name chat
     st.session_state.chat_title = f'ChatSession-{st.session_state.chat_id}'
 
-st.write('# Chat with Gemini')
+st.write('# Your Travel Desk Chatbot')
+
+# Travel details input
+st.write('## Travel Details')
+travel_from = st.text_input('Traveling from (Given)')
+destination = st.text_input('Destination (Given)')
+specific_state = st.text_input('Specific State needed if not already mentioned')
+visa_type = st.text_input('Type of Visa owned and plans for visit')
+air_travel_plans = st.text_input('Plans for Air travel and staying')
+travel_budget = st.text_input('Budget for travel?')
 
 # Chat history (allows to ask multiple questions)
 try:
@@ -84,17 +93,23 @@ if prompt := st.chat_input('Your message here...'):
         joblib.dump(past_chats, 'data/past_chats_list')
     # Display user message in chat message container
     with st.chat_message('user'):
-        st.markdown(prompt)
+        st.markdown(f"Traveling from: {travel_from}\nDestination: {destination}\nSpecific State: {specific_state}\nVisa Type: {visa_type}\nAir Travel Plans: {air_travel_plans}\nTravel Budget: {travel_budget}\n\n{prompt}")
     # Add user message to chat history
     st.session_state.messages.append(
         dict(
             role='user',
-            content=prompt,
+            content=f"Traveling from: {travel_from}\nDestination: {destination}\nSpecific State: {specific_state}\nVisa Type: {visa_type}\nAir Travel Plans: {air_travel_plans}\nTravel Budget: {travel_budget}\n\n{prompt}",
         )
     )
-    ## Send message to AI
+    # Send message to AI
+    ai_prompt = (
+        "You are an International Travel Expert. Provide detailed and well-structured travel plans, "
+        "with weather chart comparison from origin and destination.\n\n"
+        f"Traveling from: {travel_from}\nDestination: {destination}\nSpecific State: {specific_state}\n"
+        f"Visa Type: {visa_type}\nAir Travel Plans: {air_travel_plans}\nTravel Budget: {travel_budget}\n\n{prompt}"
+    )
     response = st.session_state.chat.send_message(
-        prompt,
+        ai_prompt,
         stream=True,
     )
     # Display assistant response in chat message container
